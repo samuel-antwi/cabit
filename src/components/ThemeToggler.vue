@@ -1,8 +1,7 @@
 <script setup>
-  import IconMoon from "./icons/IconMoon.vue"
-  import IconSun from "./icons/IconSun.vue"
   import { themeProvider } from "../composables/useTheme"
   import IconSunLight from "./icons/IconSunLight.vue"
+  import IconMoonLight from "./icons/IconMoonLight.vue"
 
   const store = themeProvider()
 
@@ -13,16 +12,11 @@
 <template>
   <button
     @click="toggleDark"
-    class="w-[40px] h-[40px] px-1.5 border relative transition duration-500 ease-in-out rounded-full dark:bg-[#2F2F2F] bg-gray-50"
+    class="transition duration-300 ease-in-out"
   >
-    <div class="flex justify-center items-center">
-      <div v-if="isDark">
-        <IconSunLight v-if="isDark" />
-        <IconSun v-else />
-      </div>
-      <div v-else>
-        <IconMoon />
-      </div>
+    <div class="flex items-center justify-center">
+      <IconSunLight v-if="isDark" />
+      <IconMoonLight v-else />
     </div>
   </button>
 </template>

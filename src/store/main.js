@@ -1,9 +1,15 @@
 import { defineStore } from "pinia"
 
 export const useMainStore = defineStore("main", {
-  state: () => ({}),
+  state: () => ({
+    modalShown: true,
+  }),
 
   getters: {},
 
-  actions: {},
+  actions: {
+    toggleModalShown() {
+      this.modalShown = !this.modalShown
+    },
+  },
 })

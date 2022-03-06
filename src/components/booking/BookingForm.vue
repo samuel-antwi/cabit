@@ -2,27 +2,31 @@
   import { ref, watchEffect } from "vue"
   import { useRouter } from "vue-router"
   import moment from "moment"
-  import CarType from "../CarType.vue"
   import IconLocation from "../icons/IconLocation.vue"
   import Buttonview from "../Buttonview.vue"
-  import IconTelephone from "../icons/IconTelephone.vue"
-  import IconCalendar from "../icons/IconCalendar.vue"
   import { storeToRefs } from "pinia"
   import { useBookingsStore } from "../../store/useBookings"
+  import FleetType from "../FleetType.vue"
+  import IconClose from "../icons/IconClose.vue"
+  import PortalVew from "../PortalVew.vue"
 
   const router = useRouter()
 
-  let postcode1 = ref(null)
-  let postcode2 = ref(null)
+  let pickupPostcode = ref(null)
+  let destinationPostcode = ref(null)
+  let date = ref(null)
+  let time = ref(null)
 
+  // Get the whole store instance from useBookings store
   const store = useBookingsStore()
 
   const { isLoading, bookings } = storeToRefs(store)
-  console.log(bookings.value)
 
   watchEffect(() => {
-    if (postcode1.value) store.getPickupAddress(postcode1.value)
-    if (postcode2.value) store.getDestinationAddress(postcode2.value)
+    if (pickupPostcode.value)
+      store.getPickupAddress(pickupPostcode.value)
+    if (destinationPostcode.value)
+      store.getDestinationAddress(destinationPostcode.value)
   })
 
   // Handle Booking
@@ -30,9 +34,7 @@
     console.log(bookings.value.pickup, bookings.value.destination)
 
     // Cancel WatchEffect when no longer needed
-    watchEffect(() => {
-      console.log("WatchEffect is stopped")
-    })
+    watchEffect(() => {})
 
     setTimeout(() => {
       router.push("/quotes")
@@ -56,11 +58,11 @@
     <div v-if="isLoading"></div>
     <div v-else>
       <div
-        class="max-w-2xl dark:bg-at-dark-bg shadow-md dark:text-gray-100 bg-gray-50 rounded-md p-10"
+        class="max-w-2xl p-10 rounded-md shadow-md dark:bg-at-dark-bg dark:text-gray-100 bg-gray-50"
       >
-        <div class="text-center mb-10">
+        <div class="mb-10 text-center">
           <h1
-            class="text-4xl mb-2 text-gray-700 dark:text-gray-100 uppercase font-bold"
+            class="mb-2 text-4xl font-bold text-gray-700 uppercase dark:text-gray-100"
           >
             Book Online
           </h1>
@@ -70,15 +72,15 @@
           </p>
         </div>
 
-        <CarType />
+        <FleetType />
         <form @submit.prevent="handleBookings">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-8">
+          <div class="grid grid-cols-1 gap-5 pt-8 md:grid-cols-2">
             <div class="flex flex-col w-full">
               <label
-                class="uppercase mb-1 flex justify-between font-semibold text-sm"
+                class="flex justify-between mb-1 text-sm font-semibold uppercase"
                 for="pickup"
               >
-                <span>Pickup</span>
+                <span>PICKUP</span>
                 <button
                   @click="clearAddress(bookings.pickup)"
                   v-if="bookings.pickup"
@@ -91,28 +93,36 @@
                 <div class="relative" v-if="bookings.pickup">
                   <input
                     @focus="clearAddress(bookings.pickup)"
-                    class="py-4 dark:border-gray-500 w-full input dark:bg-at-dark-input input-bordered"
+                    class="w-full py-3 dark:border-gray-500 input dark:bg-at-dark-input input-bordered"
                     v-model="bookings.pickup"
                     type="text"
                   />
                 </div>
                 <div v-else>
                   <input
-                    class="py-3 w-full dark:bg-at-dark-input dark:border-gray-500 input input-bordered"
-                    placeholder="Enter pickup postcode or address"
+                    class="w-full py-3 dark:bg-at-dark-input dark:border-gray-500 input input-bordered"
+                    placeholder="Enter Postcode or address"
                     type="text"
-                    v-model="postcode1"
+                    v-model="pickupPostcode"
                   />
-                  <IconLocation
+                  <div
                     class="absolute hidden md:block top-[12px] right-[16px]"
-                  />
+                  >
+                    <IconClose
+                      width="20pt"
+                      height="20pt"
+                      @click="pickupPostcode = null"
+                      v-if="pickupPostcode"
+                    />
+                    <IconLocation v-else />
+                  </div>
                 </div>
 
                 <div
                   class="absolute z-10 top-[52px]"
                   v-if="
                     bookings.pickupAddress?.length > 0 &&
-                    postcode1 &&
+                    pickupPostcode &&
                     !bookings.pickup
                   "
                 >
@@ -120,7 +130,7 @@
                     class="max-h-60 dark:text-gray-300 bg-gray-50 dark:bg-[#36333A] border dark:border-gray-500 border-blue-500 overflow-scroll rounded-md"
                   >
                     <p
-                      class="px-4 text-xs bg-gray-200 py-2 dark:bg-gray-600"
+                      class="px-4 py-2 text-xs bg-gray-200 dark:bg-gray-600"
                     >
                       Keep typing your address for more results.
                     </p>
@@ -132,7 +142,7 @@
                         @click="store.setPickUpAddress(add.address)"
                       >
                         <p
-                          class="py-2 px-4 hover:bg-gray-200 dark:border-gray-500 dark:hover:bg-gray-600 border-b cursor-pointer"
+                          class="px-4 py-2 border-b cursor-pointer hover:bg-gray-200 dark:border-gray-500 dark:hover:bg-gray-600"
                         >
                           {{ add.address }}
                         </p>
@@ -145,10 +155,10 @@
             <!-- Destination address -->
             <div class="flex flex-col w-full">
               <label
-                class="uppercase flex justify-between font-semibold text-sm mb-1"
+                class="flex justify-between mb-1 text-sm font-semibold uppercase"
                 for="pickup"
               >
-                <span>Destination</span>
+                <span>DESTINATION</span>
                 <button
                   @click="clearAddress(bookings.destination)"
                   v-if="bookings.destination"
@@ -161,28 +171,34 @@
                 <div class="relative" v-if="bookings.destination">
                   <input
                     @focus="clearAddress(bookings.destination)"
-                    class="py-4 w-full dark:border-gray-500 input dark:bg-at-dark-input input-bordered focus:border-blue-500"
+                    class="w-full py-3 dark:border-gray-500 input dark:bg-at-dark-input input-bordered focus:border-blue-500"
                     v-model="bookings.destination"
                     type="text"
                   />
                 </div>
                 <div v-else>
                   <input
-                    class="py-3 w-full dark:bg-at-dark-input dark:border-gray-500 input input-bordered"
-                    placeholder="Enter destination postcode or address"
+                    class="w-full py-3 dark:bg-at-dark-input dark:border-gray-500 input input-bordered"
+                    placeholder="Enter Postcode or address"
                     type="text"
-                    v-model="postcode2"
+                    v-model="destinationPostcode"
                   />
-                  <IconLocation
+                  <div
                     class="absolute hidden md:block top-[12px] right-[16px]"
-                  />
+                  >
+                    <IconClose
+                      @click="destinationPostcode = null"
+                      v-if="destinationPostcode"
+                    />
+                    <IconLocation v-else />
+                  </div>
                 </div>
 
                 <div
                   class="absolute z-10 top-[52px]"
                   v-if="
                     bookings.destinationAddress?.length > 0 &&
-                    postcode2 &&
+                    destinationPostcode &&
                     !bookings.destination
                   "
                 >
@@ -190,7 +206,7 @@
                     class="max-h-60 dark:text-gray-300 bg-gray-50 dark:bg-[#36333A] border dark:border-gray-500 border-blue-500 overflow-scroll rounded-md"
                   >
                     <p
-                      class="px-4 text-xs bg-gray-200 py-2 dark:bg-gray-600"
+                      class="px-4 py-2 text-xs bg-gray-200 dark:bg-gray-600"
                     >
                       Keep typing your address for more results.
                     </p>
@@ -204,7 +220,7 @@
                         "
                       >
                         <p
-                          class="py-2 px-4 hover:bg-gray-200 dark:border-gray-500 dark:hover:bg-gray-600 border-b cursor-pointer"
+                          class="px-4 py-2 border-b cursor-pointer hover:bg-gray-200 dark:border-gray-500 dark:hover:bg-gray-600"
                         >
                           {{ add.address }}
                         </p>
@@ -217,33 +233,31 @@
             <!-- Telephone Input -->
             <div class="flex flex-col w-full">
               <label
-                class="uppercase mb-1 font-semibold text-sm"
-                for="pickup"
-                >Phone Number</label
+                class="mb-1 text-sm font-semibold uppercase"
+                for="date"
+                >Date</label
               >
               <div class="relative">
                 <input
-                  class="py-3 w-full dark:bg-at-dark-input dark:border-gray-500 input input-bordered"
-                  placeholder="Enter pickup postcode"
-                  type="text"
-                />
-                <IconTelephone
-                  class="absolute top-[12px] right-[16px]"
+                  v-model="date"
+                  class="w-full py-3 dark:bg-at-dark-input dark:border-gray-500 input input-bordered"
+                  type="date"
                 />
               </div>
             </div>
-            <!-- Calendar Input -->
+            <!-- Time Input -->
             <div class="flex flex-col w-full">
               <label
-                class="uppercase mb-1 font-semibold text-sm"
-                for="pickup"
-                >Date and time</label
+                class="mb-1 text-sm font-semibold uppercase"
+                for="time"
+                >Time</label
               >
-              <div class="relative">
+              <div>
                 <input
-                  class="py-3 w-full z-0 dark:bg-at-dark-input dark:border-gray-500 input input-bordered"
-                  placeholder="Date and time"
-                  type="date"
+                  v-model="time"
+                  class="z-0 w-full py-3 dark:bg-at-dark-input dark:border-gray-500"
+                  type="time"
+                  id="time"
                 />
               </div>
             </div>
@@ -255,6 +269,9 @@
         </form>
       </div>
     </div>
+    <teleport to="#portal-root">
+      <PortalVew />
+    </teleport>
   </main>
 </template>
 

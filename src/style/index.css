@@ -1,3 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: Futura;
+    font-weight: 400;
+    src: url(/fonts/FuturaStd-Book.otf) format("woff");
+    font-display: swap;
+  }
+  @font-face {
+    font-family: Futura;
+    font-weight: 500;
+    src: url(/fonts/FuturaStd-Medium.otf) format("woff");
+    font-display: swap;
+  }
+  @font-face {
+    font-family: Futura;
+    font-weight: 700;
+    src: url(/fonts/FuturaStd-Bold.otf) format("woff");
+    font-display: swap;
+  }
+  @font-face {
+    font-family: Futura;
+    font-weight: 800;
+    src: url(/fonts/FuturaStd-ExtraBold.otf) format("woff");
+    font-display: swap;
+  }
+}
+
+body {
+  font-family: "Poppins", sans-serif !important;
+}

@@ -51,6 +51,24 @@ export const useBookingsStore = defineStore("booking", () => {
     }
   }
 
+  const getDistance = async (postcode1, postcode2) => {
+    try {
+      this.isLoading = true
+      const res = await fetch(
+        `https://api.getAddress.io/distance/${postcode1}/${postcode2}
+          ?api-key=${apiKey} `
+      )
+      const dist = await res.json()
+      bookings.value.distance = dist.metres
+      isLoading.value = false
+    } catch (error) {
+      errorMsg.value = error
+      console.log(error.message)
+    } finally {
+      isLoading.value = false
+    }
+  }
+
   const setPickUpAddress = (v) => {
     bookings.value.pickup = v
   }

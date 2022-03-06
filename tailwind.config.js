@@ -9,9 +9,13 @@ module.exports = {
         "at-dark-bg": "#37333b",
         "at-dark-input": "#282D32",
       },
+      fontFamily: {
+        futura: ["Futura", "sans-serif"],
+        poppins: ["Poppins", "sans-serif"],
+      },
     },
   },
-  plugins: [require("daisyui")],
+  plugins: [require("@tailwindcss/forms")],
   daisyui: {
     themes: false,
   },

@@ -1,11 +1,12 @@
 import { defineStore } from "pinia"
 import supabase from "../lib/supabase.js"
-import { useSessionStorage } from "@vueuse/core"
+import useModal from "../composables/useModal.js"
+const { toggleModal } = useModal()
 
 export const useTaxiStore = defineStore("taxis", {
   state: () => ({
-    fleets: useSessionStorage("fleets", []),
-    fleet: useSessionStorage("fleet", null),
+    fleets: [],
+    fleet: null,
     isLoading: false,
     errorMsg: null,
   }),
@@ -31,14 +32,13 @@ export const useTaxiStore = defineStore("taxis", {
     async getFleetById(id) {
       try {
         this.isLoading = true
-
-        let { data: fleet, error } = await supabase
+        const { data: fleet, error } = await supabase
           .from("fleets")
           .select("*")
           .eq("id", id)
-        this.fleet = fleet[0]
         if (error) throw error
-        console.log(fleet)
+        this.fleet = fleet[0]
+        await toggleModal()
         this.isLoading = false
       } catch (error) {
         this.errorMsg = error.message
