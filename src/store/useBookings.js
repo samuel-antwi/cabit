@@ -7,6 +7,7 @@ const apiKey = import.meta.env.VITE_POSTCODE_API_KEY
 export const useBookingsStore = defineStore("booking", () => {
   let isLoading = ref(false)
   let errorMsg = ref(null)
+  let usage = ref(null)
   let bookings = ref({
     distance: null,
     address: null,
@@ -69,6 +70,19 @@ export const useBookingsStore = defineStore("booking", () => {
     }
   }
 
+  // Get Api usage
+  const getApiUsage = async () => {
+    try {
+      const res = await fetch(
+        `https://api.getAddress.io/usage?api-key=${apiKey}`
+      )
+      usage.value = await res.json()
+      console.log(usage.value)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   const setPickUpAddress = (v) => {
     bookings.value.pickup = v
   }
@@ -85,5 +99,8 @@ export const useBookingsStore = defineStore("booking", () => {
     setPickUpAddress,
     setDestinationAddress,
     bookings,
+    getApiUsage,
+    getDistance,
+    usage,
   }
 })

@@ -17,7 +17,7 @@
       <img class="" :src="getImage(fleet.image)" :alt="fleet.name" />
       <div>
         <h2
-          class="mb-3 text-xl font-semibold tracking-wide capitalize"
+          class="mb-3 text-xl font-semibold tracking-wide capitalize dark:text-gray-300"
         >
           {{ fleet?.name }}
         </h2>

@@ -1,20 +1,33 @@
 <script setup>
   import FleetDetails from "./booking/FleetDetails.vue"
   import IconClose from "./icons/IconClose.vue"
-  import useModal from "../composables/useModal"
+  import { useModal } from "../composables/useModal"
 
   const { showModal, toggleModal } = useModal()
 </script>
 
 <template>
   <div @click.self="toggleModal" v-if="showModal" class="backdrop">
-    <div class="bg-white rounded-xl modal-content">
+    <div
+      class="bg-white dark:bg-at-dark-secondary dark:text-gray-400 rounded-xl modal-content"
+    >
       <div class="relative">
         <button
           @click="toggleModal"
-          class="absolute flex items-center justify-center w-8 h-8 transition duration-300 ease-in-out rounded-full hover:bg-gray-300 right-3 top-1"
+          class="absolute flex items-center justify-center w-8 h-8 p-1 transition duration-300 ease-in-out rounded-full dark:hover:bg-at-dark-primary hover:bg-gray-300 top-3 right-3"
         >
-          <IconClose width="30pt" height="30pt" />
+          <IconClose
+            class="dark:hidden"
+            width="30pt"
+            height="30pt"
+            fill="#000001"
+          />
+          <IconClose
+            class="hidden dark:block"
+            width="30pt"
+            height="30pt"
+            fill="#ffffff"
+          />
         </button>
       </div>
       <FleetDetails :toggleModal="toggleModal" />
@@ -22,7 +35,7 @@
   </div>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
   .backdrop {
     position: fixed;
     top: 0;

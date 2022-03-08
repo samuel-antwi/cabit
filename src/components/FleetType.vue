@@ -17,7 +17,7 @@
       @click="taxiStore.getFleetById(fleet.id)"
       v-for="fleet in fleets"
       :key="fleet.id"
-      class="car-type hover:bg-at-primary dark:bg-[#242424] flex justify-center items-center rounded-md"
+      class="flex items-center justify-center rounded-md dark:hover:bg-at-dark-primary car-type hover:bg-at-secondary hover:text-gray-50"
     >
       <div class="flex flex-col">
         <img
@@ -25,7 +25,9 @@
           :src="getImageLocalPath(fleet.image)"
           :alt="fleet.name"
         />
-        <p class="font-semibold capitalize">{{ fleet.type }}</p>
+        <p class="font-semibold capitalize">
+          {{ fleet.type }}
+        </p>
       </div>
     </button>
   </div>

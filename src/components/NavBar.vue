@@ -1,20 +1,22 @@
 <script setup>
-  import IconTaxiYellow from "./icons/IconTaxiYellow.vue"
+  import IconTaxi from "./icons/IconTaxi.vue"
   import ThemeToggler from "./ThemeToggler.vue"
 </script>
 
 <template>
-  <nav class="nav fixed w-full top-0 text-gray-50">
+  <nav
+    class="fixed top-0 w-full text-gray-800 shadow-md nav dark:text-gray-50"
+  >
     <div
-      class="flex justify-between max-w-6xl px-4 mx-auto items-center"
+      class="flex items-center justify-between max-w-6xl px-4 mx-auto"
     >
       <router-link to="/">
-        <IconTaxiYellow />
+        <IconTaxi />
       </router-link>
 
-      <div class="md:flex justify-between items-center space-x-7">
+      <div class="items-center justify-between md:flex space-x-7">
         <div
-          class="hidden md:flex justify-between items-center space-x-7"
+          class="items-center justify-between hidden md:flex space-x-7"
         >
           <router-link to="/about">About</router-link>
           <router-link to="/about">Account</router-link>
@@ -28,7 +30,7 @@
 
 <style lang="scss">
   .nav {
-    background-color: rgba(0, 0, 0, 0.7);
+    /* background-color: rgba(0, 0, 0, 0.7); */
     z-index: 1;
   }
 </style>

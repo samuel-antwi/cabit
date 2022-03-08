@@ -8,8 +8,12 @@
 </script>
 
 <template>
-  <div>
-    <h1 class="py-3 text-lg font-semibold tracking-wide">Features</h1>
+  <div class="dark:text-gray-900">
+    <h1
+      class="py-3 text-lg font-semibold tracking-wide dark:text-gray-300"
+    >
+      Features
+    </h1>
     <div class="flex items-center space-x-4">
       <div
         class="flex items-center space-x-3 py-1 bg-[#E4E4E4] px-3 rounded-full"

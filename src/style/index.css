@@ -4,6 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .btn-1 {
+    @apply flex items-center justify-center w-full px-16 py-5 mx-auto text-xl font-semibold text-gray-100 uppercase rounded-full bg-at-secondary dark:border dark:border-gray-400 dark:hover:bg-at-dark-secondary dark:bg-at-dark-primary md:w-auto md:px-32 dark:text-gray-200;
+  }
+}
+
 @layer base {
   @font-face {
     font-family: Futura;

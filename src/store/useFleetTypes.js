@@ -1,6 +1,6 @@
 import { defineStore } from "pinia"
 import supabase from "../lib/supabase.js"
-import useModal from "../composables/useModal.js"
+import { useModal } from "../composables/useModal.js"
 const { toggleModal } = useModal()
 
 export const useTaxiStore = defineStore("taxis", {

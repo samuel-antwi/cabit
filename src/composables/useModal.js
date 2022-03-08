@@ -6,8 +6,6 @@ const toggleModal = () => {
   showModal.value = !showModal.value
 }
 
-const useModal = () => {
+export const useModal = () => {
   return { showModal, toggleModal }
 }
-
-export default useModal

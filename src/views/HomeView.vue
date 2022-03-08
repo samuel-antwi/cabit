@@ -5,11 +5,14 @@
 
 <template>
   <main>
-    <div class="min-h-screen pt-40 home">
+    <div class="min-h-screen pt-28 home">
       <div class="max-w-5xl px-4 mx-auto">
         <BookingForm />
       </div>
     </div>
+    <teleport to="#portal-root">
+      <PortalVew />
+    </teleport>
   </main>
 </template>
 
