@@ -16,4 +16,17 @@
   </main>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+  /* .home {
+    background: url("../assets/images/woman-on-phone.jpeg");
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+  } */
+
+  label {
+    color: rgb(75 85 99);
+  }
+</style>

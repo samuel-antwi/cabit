@@ -20,16 +20,16 @@
       >
         <IconPassengers width="20pt" height="20pt" fill="#333" />
 
-        <p>{{ props.fleet.capacity }}</p>
+        <p>{{ props.fleet?.capacity }}</p>
       </div>
       <div
-        v-if="props.fleet.wifi"
+        v-if="props.fleet?.wifi"
         class="py-1 bg-[#E4E4E4] px-3 rounded-full"
       >
         <IconWifi width="20pt" height="20pt" fill="#333" />
       </div>
       <div
-        v-if="props.fleet.contactlessPayment"
+        v-if="props.fleet?.contactlessPayment"
         class="py-1 bg-[#E4E4E4] px-3 rounded-full"
       >
         <IconContactless width="20pt" height="20pt" fill="#333" />
@@ -38,7 +38,7 @@
         class="flex items-center space-x-3 py-1 bg-[#E4E4E4] px-3 rounded-full"
       >
         <IconLuggage width="20pt" height="20pt" fill="#333" />
-        <p>{{ props.fleet.luggages }}</p>
+        <p>{{ props.fleet?.luggages }}</p>
       </div>
     </div>
   </div>

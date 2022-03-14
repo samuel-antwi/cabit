@@ -1,0 +1,48 @@
+{
+  "fleets": [
+    {
+      "name": "Saloon-Seda",
+      "description": "The most well-liked and cost-effective vehicle, the saloon type minicabs can seat up to four passengers with medium-sized luggage. Our fleet consists of modern saloon vehicles. Ideal for airport transfers, school runs, and private hire services.saloon-type.",
+      "id": 1,
+      "wifi": false,
+      "contactless": true,
+      "capacity": 3,
+      "luggages": 2,
+      "image": "123toyotaprius1.png",
+      "type": "standard"
+    },
+    {
+      "name": "estate",
+      "description": "Our Estate cars also known as  station wagons are an ideal choice for passengers with larger size luggage",
+      "id": 2,
+      "wifi": true,
+      "contactless": true,
+      "capacity": 3,
+      "luggages": 2,
+      "image": "86fordgalaxy1.png",
+      "type": "business"
+    },
+    {
+      "name": "Mercedes E-Class",
+      "description": "Every aspect of the E-Class Saloon exudes refinement. Comfort is unparalleled with ergonomic luxury seating and digital climate control. Direct Control puts power at your fingertips, while a suite of advanced safety systems like Adaptive braking and ESP stability protection add to your peace of mind.",
+      "id": 3,
+      "wifi": true,
+      "contactless": true,
+      "capacity": 3,
+      "luggages": 2,
+      "image": "912vauxhaulzafira1.png",
+      "type": "executive"
+    },
+    {
+      "name": "Mercedes V-Class",
+      "description": "Direct Control puts power at your fingertips, while a suite of advanced safety systems like Adaptive braking and ESP stability protection add to your peace of mind.",
+      "id": 4,
+      "wifi": true,
+      "contactless": true,
+      "capacity": 6,
+      "luggages": 4,
+      "image": "935vian.png",
+      "type": "chaeffeur"
+    }
+  ]
+}

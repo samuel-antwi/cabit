@@ -1,12 +1,11 @@
 <script setup>
   import { themeProvider } from "../composables/useTheme"
-  import IconSunLight from "./icons/IconSunLight.vue"
-  import IconMoonLight from "./icons/IconMoonLight.vue"
+  import IconMoon from "~icons/mdi/weather-night"
+  import IconSun from "~icons/mdi/white-balance-sunny"
 
   const store = themeProvider()
 
-  const isDark = store.isDark
-  const toggleDark = store.toggleDark
+  const { isDark, toggleDark } = store
 </script>
 
 <template>
@@ -15,8 +14,8 @@
     class="transition duration-300 ease-in-out"
   >
     <div class="flex items-center justify-center">
-      <IconSunLight v-if="isDark" />
-      <IconMoonLight v-else />
+      <icon-sun v-if="isDark" />
+      <icon-moon v-else />
     </div>
   </button>
 </template>

@@ -1,9 +1,11 @@
 <script setup>
-  import FleetDetails from "./booking/FleetDetails.vue"
+  import FleetDetails from "./fleets/FleetDetails.vue"
   import IconClose from "./icons/IconClose.vue"
   import { useModal } from "../composables/useModal"
 
-  const { showModal, toggleModal } = useModal()
+  const modal = useModal()
+
+  const { showModal, toggleModal } = modal
 </script>
 
 <template>
